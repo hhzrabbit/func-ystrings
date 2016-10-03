@@ -48,12 +48,13 @@ char* mystrcat(char *dest, char *src){
 
 char* mystrncat(char *dest, char *src, int n){
   char *ret = dest;
-  dest += mystrlen(dest) - 1; //point to last char of dest
+  dest += mystrlen(dest); //point to last char of dest
   int count = 0;
   while (*src && count < n){
     *dest = *src;
     dest++;
     src++;
+    count++;
   }
   *dest = 0; //adds null terminating char to end of str
   return ret;
@@ -81,10 +82,10 @@ int mystrchr(char *s, char c){
 }
 
 int main(){
-  char s1[10] = "Hello";
-  char s2[10] = "";
+  char s1[20] = "Hello";
+  char s2[20] = "";
 
-  printf("Before applying functions:\n");
+  printf("\nBefore applying functions:\n");
   printf("s1 = %s, length = %d\n", s1, mystrlen(s1));
   printf("s2 = %s, length = %d\n\n", s2, mystrlen(s2));
 
@@ -96,6 +97,13 @@ int main(){
   mystrcat(s2, toCat);
   printf("Cat \"Man\" to s2: s2 = %s, length = %d\n\n", s2, mystrlen(s2));
  
+  printf("Testing str n functions:\n");
+  char forNtests[10] = "Goodbye";
+  mystrncpy(s2, forNtests, 4);
+  printf("Copy 4 chars of \"Goodbye\" to s2: s2 = %s, length = %d\n", s2, mystrlen(s2));  
+  mystrncat(s2, forNtests, 3);
+  printf("Cat 3 chars of \"Goodbye\" to s2: s2 = %s, length = %d\n\n", s2, mystrlen(s2));
+
   char str1[5] = "abc";
   char str2[5] = "bc";
   char str3[5] = "bc";
@@ -105,5 +113,6 @@ int main(){
   printf("comparing str2 (\"bc\") and str1 (\"abc\"): %d\n", mystrcmp(str2, str1));
   printf("comparing str2 (\"bc\") and str4 (\"z\"): %d\n", mystrcmp(str2, str4));
   printf("comparing str2(\" bc\" and str3 (\"bc\"): %d\n", mystrcmp(str2, str3));
+
   return 0;
 }

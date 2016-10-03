@@ -81,6 +81,30 @@ char* mystrchr(char *s, char c){
   return 0;
 }
 
+char* mystrstr(char *s, char *query){
+  while (*s){
+    if (*s == *query){ //search for first char of query
+      char * test = s;
+      char * p = query;
+      char found = 1;
+      while (*p){ 
+	if (*test != *p){
+	  found = 0;
+	  break;
+	}
+	else {
+	  test++;
+	  p++;
+	}
+      }
+      if (found) 
+	return s;
+    }
+    s++;
+  }
+  return 0;
+
+}
 
 int main(){
   char s1[20] = "Hello";
@@ -110,14 +134,18 @@ int main(){
   char str3[5] = "bc";
   char str4[5] = "z";
   printf("Testing strcmp:\n");
-  printf("comparing str1 (\"abc\") and str2 (\"bc\"): %d\n", mystrcmp(str1, str2));
-  printf("comparing str2 (\"bc\") and str1 (\"abc\"): %d\n", mystrcmp(str2, str1));
-  printf("comparing str2 (\"bc\") and str4 (\"z\"): %d\n", mystrcmp(str2, str4));
-  printf("comparing str2(\" bc\" and str3 (\"bc\"): %d\n\n", mystrcmp(str2, str3));
+  printf("Comparing str1 (\"abc\") and str2 (\"bc\"): %d\n", mystrcmp(str1, str2));
+  printf("Comparing str2 (\"bc\") and str1 (\"abc\"): %d\n", mystrcmp(str2, str1));
+  printf("Comparing str2 (\"bc\") and str4 (\"z\"): %d\n", mystrcmp(str2, str4));
+  printf("Comparing str2(\" bc\" and str3 (\"bc\"): %d\n\n", mystrcmp(str2, str3));
 
   printf("Testing strchr:\n");
   printf("Looking for 'o' in \"Goodbye\": %s\n",  mystrchr(gb, 'o'));
-  printf("Looking for 'f' in \"Goodbye\": %s\n",  mystrchr(gb, 'f'));
+  printf("Looking for 'f' in \"Goodbye\": %s\n\n",  mystrchr(gb, 'f'));
+
+  printf("Testing strstr:\n");
+  printf("Looking for \"db\" in \"Goodbye\": %s\n",  mystrstr(gb, "db"));
+  printf("Looking for \"oodg\" in \"Goodbye\": %s\n\n",  mystrstr(gb, "oodg"));
 
 
   return 0;

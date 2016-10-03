@@ -72,14 +72,15 @@ int mystrcmp(char *s1, char *s2){
   return *s1 - *s2;
 }
 
-int mystrchr(char *s, char c){
+char* mystrchr(char *s, char c){
   while (*s){
     if (*s == c)
-      break;
+      return s;
     s++;
   }
-  return *s;
+  return 0;
 }
+
 
 int main(){
   char s1[20] = "Hello";
@@ -98,10 +99,10 @@ int main(){
   printf("Cat \"Man\" to s2: s2 = %s, length = %d\n\n", s2, mystrlen(s2));
  
   printf("Testing str n functions:\n");
-  char forNtests[10] = "Goodbye";
-  mystrncpy(s2, forNtests, 4);
+  char gb[10] = "Goodbye";
+  mystrncpy(s2, gb, 4);
   printf("Copy 4 chars of \"Goodbye\" to s2: s2 = %s, length = %d\n", s2, mystrlen(s2));  
-  mystrncat(s2, forNtests, 3);
+  mystrncat(s2, gb, 3);
   printf("Cat 3 chars of \"Goodbye\" to s2: s2 = %s, length = %d\n\n", s2, mystrlen(s2));
 
   char str1[5] = "abc";
@@ -112,7 +113,12 @@ int main(){
   printf("comparing str1 (\"abc\") and str2 (\"bc\"): %d\n", mystrcmp(str1, str2));
   printf("comparing str2 (\"bc\") and str1 (\"abc\"): %d\n", mystrcmp(str2, str1));
   printf("comparing str2 (\"bc\") and str4 (\"z\"): %d\n", mystrcmp(str2, str4));
-  printf("comparing str2(\" bc\" and str3 (\"bc\"): %d\n", mystrcmp(str2, str3));
+  printf("comparing str2(\" bc\" and str3 (\"bc\"): %d\n\n", mystrcmp(str2, str3));
+
+  printf("Testing strchr:\n");
+  printf("Looking for 'o' in \"Goodbye\": %s\n",  mystrchr(gb, 'o'));
+  printf("Looking for 'f' in \"Goodbye\": %s\n",  mystrchr(gb, 'f'));
+
 
   return 0;
 }
